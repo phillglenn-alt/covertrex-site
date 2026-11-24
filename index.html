@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#000000">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src 'self' data:; connect-src https://a.klaviyo.com; form-action 'none'; base-uri 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Covertrex</title>
+<meta name="description" content="Covertrex. See more. Say less.">
+<style>
+  :root {
+    --white: #ffffff;
+    /* Neon halo colour. Change these two to retint the pulse. */
+    --neon: 190, 235, 255;
+    --neon-deep: 90, 190, 255;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: #000; color: var(--white); }
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: max(4vh, env(safe-area-inset-top)) 16px max(5vh, env(safe-area-inset-bottom));
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden;
+  }
+  main {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4vh;
+  }
+  .crest-wrap {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+  }
+  .crest {
+    width: min(92vw, 118vh);
+    max-height: 70vh;
+    height: auto;
+    overflow: visible;
+    fill: var(--white);
+  }
+  .brand { display: flex; flex-direction: column; align-items: center; gap: 1.4rem; }
+  .wordmark { width: min(78vw, 420px); height: auto; fill: var(--white); overflow: visible; }
+  .tagline {
+    font-size: clamp(0.72rem, 1.6vw, 0.9rem);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-left: 0.42em; /* balances trailing letter-spacing */
+    color: rgba(255,255,255,.82);
+  }
+
+  /* Owl eyes blink every 3 seconds */
+  .eyes {
+    transform-box: fill-box;
+    transform-origin: 50% 62%;
+    animation: blink 3s infinite;
+  }
+  @keyframes blink {
+    0%, 88%, 100% { transform: scaleY(1); }
+    92%           { transform: scaleY(0.08); }
+    96%           { transform: scaleY(1); }
+  }
+
+  /* Neon pulse lights up the white every 6 seconds */
+  .glow { animation: neon 6s infinite; }
+  @keyframes neon {
+    0%, 30%, 100% {
+      filter: drop-shadow(0 0 0 rgba(var(--neon), 0));
+    }
+    8% {
+      filter:
+        drop-shadow(0 0 2px rgba(255,255,255,1))
+        drop-shadow(0 0 8px rgba(var(--neon), .95))
+        drop-shadow(0 0 22px rgba(var(--neon-deep), .85))
+        drop-shadow(0 0 48px rgba(var(--neon-deep), .55));
+    }
+    14% {
+      filter:
+        drop-shadow(0 0 1px rgba(255,255,255,.9))
+        drop-shadow(0 0 5px rgba(var(--neon), .8))
+        drop-shadow(0 0 14px rgba(var(--neon-deep), .6))
+        drop-shadow(0 0 30px rgba(var(--neon-deep), .3));
+    }
+  }
+  .tagline.glow { animation-name: neon-text; }
+  @keyframes neon-text {
+    0%, 30%, 100% { text-shadow: none; color: rgba(255,255,255,.82); }
+    8%  { color: #fff; text-shadow: 0 0 4px #fff, 0 0 12px rgba(var(--neon), .9), 0 0 26px rgba(var(--neon-deep), .7); }
+    14% { color: #fff; text-shadow: 0 0 3px #fff, 0 0 8px rgba(var(--neon), .6), 0 0 18px rgba(var(--neon-deep), .4); }
+  }
+
+
+  /* Sign-up */
+  .signup { width: min(92vw, 420px); margin-top: .4rem; }
+  .signup-row {
+    display: flex;
+    border: 1px solid rgba(255,255,255,.55);
+    border-radius: 999px;
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .signup-row:focus-within {
+    border-color: #fff;
+    box-shadow: 0 0 6px rgba(var(--neon), .8), 0 0 18px rgba(var(--neon-deep), .5);
+  }
+  .signup input[type=email] {
+    flex: 1; min-width: 0;
+    background: transparent; border: 0; outline: 0;
+    color: #fff; font: inherit; font-size: 16px;
+    padding: .8rem 1.1rem;
+  }
+  .signup input[type=email]::placeholder { color: rgba(255,255,255,.5); }
+  .signup button {
+    border: 0; cursor: pointer;
+    background: #fff; color: #000;
+    font: inherit; font-size: .72rem; font-weight: 600;
+    letter-spacing: .24em; text-transform: uppercase;
+    padding: 0 1.2rem 0 1.4rem;
+    border-radius: 999px; margin: 3px;
+    transition: box-shadow .2s;
+  }
+  .signup button:hover, .signup button:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 6px rgba(var(--neon), 1), 0 0 20px rgba(var(--neon-deep), .8);
+  }
+  .signup button[disabled] { opacity: .6; cursor: wait; }
+  .consent {
+    display: flex; gap: .55rem; align-items: flex-start;
+    margin-top: .8rem;
+    font-size: .7rem; line-height: 1.45; color: rgba(255,255,255,.6);
+    text-align: left;
+  }
+  .consent input { accent-color: #fff; margin-top: .15rem; flex: none; }
+  .signup-msg { min-height: 1.2em; margin-top: .6rem; font-size: .78rem; text-align: center; color: rgba(255,255,255,.85); }
+  .signup-msg.err { color: #ffb4b4; }
+  .signup.done .signup-row, .signup.done .consent { display: none; }
+  .signup.done .signup-msg {
+    font-size: .8rem; letter-spacing: .3em; text-transform: uppercase; color: #fff;
+    text-shadow: 0 0 6px rgba(var(--neon), .9), 0 0 18px rgba(var(--neon-deep), .6);
+  }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .brand { gap: 1.1rem; }
+  @media (max-height: 700px) { .crest { max-height: 52vh; } }
+
+
+  /* Logo and tagline glow by default and hand over to the owl:
+     when the owl's 6s neon pulse fires, the logo glow switches off; when the owl fades, the logo flicks back on.
+     Both start 3s after opening so the page opens on the glowing logo. */
+  .crest.glow { animation-delay: 3s; animation-fill-mode: both; }
+  .wordmark.logo-glow { animation: logoglow 6s 3s infinite both; }
+  @keyframes logoglow {
+    0%  { filter: drop-shadow(0 0 2px rgba(255,255,255,1)) drop-shadow(0 0 8px rgba(var(--neon), .95)) drop-shadow(0 0 22px rgba(var(--neon-deep), .85)) drop-shadow(0 0 48px rgba(var(--neon-deep), .55)); }
+    2%, 30% { filter: drop-shadow(0 0 0 rgba(var(--neon), 0)); }
+    31% { filter: drop-shadow(0 0 2px rgba(255,255,255,1)) drop-shadow(0 0 8px rgba(var(--neon), .95)) drop-shadow(0 0 22px rgba(var(--neon-deep), .85)) drop-shadow(0 0 48px rgba(var(--neon-deep), .55)); }
+    32% { filter: drop-shadow(0 0 0 rgba(var(--neon), 0)); }
+    34%, 100% { filter: drop-shadow(0 0 2px rgba(255,255,255,1)) drop-shadow(0 0 8px rgba(var(--neon), .95)) drop-shadow(0 0 22px rgba(var(--neon-deep), .85)) drop-shadow(0 0 48px rgba(var(--neon-deep), .55)); }
+  }
+  .tagline.logo-text { animation: logotext 6s 3s infinite both; }
+  @keyframes logotext {
+    0%  { color: #fff; text-shadow: 0 0 4px #fff, 0 0 12px rgba(var(--neon), .9), 0 0 26px rgba(var(--neon-deep), .7); }
+    2%, 30% { color: rgba(255,255,255,.82); text-shadow: none; }
+    31% { color: #fff; text-shadow: 0 0 4px #fff, 0 0 12px rgba(var(--neon), .9), 0 0 26px rgba(var(--neon-deep), .7); }
+    32% { color: rgba(255,255,255,.82); text-shadow: none; }
+    34%, 100% { color: #fff; text-shadow: 0 0 4px #fff, 0 0 12px rgba(var(--neon), .9), 0 0 26px rgba(var(--neon-deep), .7); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .eyes, .glow, .logo-glow, .logo-text { animation: none; }
+    .crest, .wordmark { filter: drop-shadow(0 0 6px rgba(var(--neon), .45)); }
+  }
+  @media (max-aspect-ratio: 3/4) {
+    .crest { width: 96vw; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1 class="crest-wrap">
+    <span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Covertrex</span>
+    <svg class="crest glow" viewBox="144 48 352 274" aria-hidden="true" focusable="false">
+      <path d="M200 143 C224 88 267 56 320 56 C374 56 418 89 440 143 C416 94 371 60 320 60 C269 60 224 93 200 143 Z"/>
+      <path d="M197 202 C212 262 262 315 320 315 C379 315 430 266 443 201 C429 260 378 312 320 312 C261 312 215 262 197 202 Z"/>
+      <g class="eyes">
+        <path d="M150.68 127 C192.5 148.42 240.44 169.84 283.28 190.24 C290.42 193.3 293.48 197.38 296.54 204.52 C305.72 220.84 310.82 236.14 316.94 251.44 C308.78 240.22 298.58 227.98 288.38 220.84 C265.94 207.58 241.46 196.36 221.06 183.1 C212.9 208.6 235.34 240.22 275.12 216.76 C247.58 248.38 198.62 227.98 205.76 175.96 Z"/>
+        <path d="M489.32 127 C447.5 148.42 399.56 169.84 356.72 190.24 C349.58 193.3 346.52 197.38 343.46 204.52 C334.28 220.84 329.18 236.14 323.06 251.44 C331.22 240.22 341.42 227.98 351.62 220.84 C374.06 207.58 398.54 196.36 418.94 183.1 C427.1 208.6 404.66 240.22 364.88 216.76 C392.42 248.38 441.38 227.98 434.24 175.96 Z"/>
+      </g>
+    </svg>
+  </h1>
+  <div class="brand">
+    <svg class="wordmark logo-glow" viewBox="56 154 529 52" role="img" aria-label="Covertrex">
+  <g id="COVERTREX_Wordmark">
+    <path id="C_outline" d="M119.3 173.7 L107.6 174.6 C104.9 169.2 99.5 166.5 90.5 166.5 C79.7 166.5 73.4 171.9 73.4 180 C73.4 188.1 79.7 192.6 90.5 192.6 C99.5 192.6 104.9 189.9 107.6 184.5 L119.3 185.4 C116.6 196.2 105.8 201.6 90.5 201.6 C72.5 201.6 60.8 193.5 60.8 180 C60.8 166.5 72.5 158.4 90.5 158.4 C105.8 158.4 116.6 163.8 119.3 173.7 Z"/>
+    <path id="O_outline" d="M155.3 158.4 C175.1 158.4 186.8 166.5 186.8 180 C186.8 193.5 175.1 201.6 155.3 201.6 C136.4 201.6 124.7 193.5 124.7 180 C124.7 166.5 136.4 158.4 155.3 158.4 Z M155.3 166.5 C143.6 166.5 136.4 171.9 136.4 180 C136.4 188.1 143.6 192.6 155.3 192.6 C167 192.6 175.1 188.1 175.1 180 C175.1 171.9 167 166.5 155.3 166.5 Z"/>
+    <polygon id="V_outline" points="188.6,159.3 202.1,159.3 220.1,189.9 237.2,159.3 249.8,159.3 227.3,199.8 212,199.8"/>
+    <polygon id="E_outline" points="255.2,159.3 301.1,159.3 301.1,167.4 266.9,167.4 266.9,175.5 298.4,175.5 298.4,183.6 266.9,183.6 266.9,191.7 301.1,191.7 301.1,199.8 255.2,199.8"/>
+    <path id="R_outline" d="M309.2 159.3 L342.5 159.3 C352.4 159.3 357.8 163.8 357.8 171.9 C357.8 179.1 353.3 182.7 345.2 184.5 L359.6 199.8 L345.2 199.8 L331.7 184.5 L320.9 184.5 L320.9 199.8 L309.2 199.8 Z M320.9 167.4 L320.9 176.4 L340.7 176.4 C344.3 176.4 346.1 174.6 346.1 171.9 C346.1 169.2 344.3 167.4 340.7 167.4 Z"/>
+    <polygon id="T_outline" points="361.4,159.3 410,159.3 410,167.4 391.1,167.4 391.1,199.8 379.4,199.8 379.4,167.4 361.4,167.4"/>
+    <path id="R_outline-2" d="M416.3 159.3 L449.6 159.3 C459.5 159.3 464.9 163.8 464.9 171.9 C464.9 179.1 460.4 182.7 452.3 184.5 L466.7 199.8 L452.3 199.8 L438.8 184.5 L428 184.5 L428 199.8 L416.3 199.8 Z M428 167.4 L428 176.4 L447.8 176.4 C451.4 176.4 453.2 174.6 453.2 171.9 C453.2 169.2 451.4 167.4 447.8 167.4 Z"/>
+    <polygon id="E_outline-2" points="473,159.3 518.9,159.3 518.9,167.4 484.7,167.4 484.7,175.5 516.2,175.5 516.2,183.6 484.7,183.6 484.7,191.7 518.9,191.7 518.9,199.8 473,199.8"/>
+    <polygon id="X_outline" points="524.3,159.3 539.6,159.3 552.2,172.8 563.9,159.3 579.2,159.3 559.4,179.1 580.1,199.8 564.8,199.8 552.2,185.4 538.7,199.8 524.3,199.8 544.1,179.1"/>
+  </g>
+    </svg>
+    <p class="tagline logo-text">See more. Say less.</p>
+    <form class="signup" id="signup" novalidate>
+      <label class="sr" for="email">Email address</label>
+      <div class="signup-row">
+        <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="Your email" required>
+        <button type="submit">Sign up</button>
+      </div>
+      <div class="hp" aria-hidden="true"><label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <label class="consent"><input type="checkbox" name="consent" required> <span>I'm 13 or over and happy to get emails from Covertrex about drops and news. Unsubscribe any time.</span></label>
+      <p class="signup-msg" id="signup-msg" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</main>
+<script>
+/* Klaviyo sign-up. Fill in these two values from your Klaviyo account:
+   KLAVIYO_COMPANY_ID = your 6-character Public API Key (Settings > Account > API keys)
+   KLAVIYO_LIST_ID    = the ID of your sign-up list (Audience > Lists & segments > list > Settings) */
+const KLAVIYO_COMPANY_ID = "R7xf9t";
+const KLAVIYO_LIST_ID = "STJCuW";
+
+(function () {
+  const form = document.getElementById('signup');
+  const msg = document.getElementById('signup-msg');
+  const btn = form.querySelector('button');
+  const say = (text, isErr) => { msg.textContent = text; msg.classList.toggle('err', !!isErr); };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email.value.trim();
+    if (form.website.value) return; // bot filled the hidden field
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return say('Please enter a valid email address.', true);
+    if (!form.consent.checked) return say('Please tick the box to agree to emails.', true);
+    if (!KLAVIYO_COMPANY_ID || !KLAVIYO_LIST_ID) return say('Sign-up opens soon. Check back shortly.', true);
+
+    btn.disabled = true; say('');
+    try {
+      const res = await fetch('https://a.klaviyo.com/client/subscriptions/?company_id=' + encodeURIComponent(KLAVIYO_COMPANY_ID), {
+        method: 'POST',
+        headers: { 'content-type': 'application/vnd.api+json', 'revision': '2024-10-15' },
+        body: JSON.stringify({ data: {
+          type: 'subscription',
+          attributes: {
+            custom_source: 'Holding page',
+            profile: { data: { type: 'profile', attributes: { email } } }
+          },
+          relationships: { list: { data: { type: 'list', id: KLAVIYO_LIST_ID } } }
+        } })
+      });
+      if (!res.ok) {
+        let detail = '';
+        try { const j = await res.json(); detail = (j.errors && j.errors[0] && (j.errors[0].detail || j.errors[0].title)) || ''; } catch (_) {}
+        console.error('Klaviyo sign-up failed', res.status, detail);
+        say('Sign-up failed (' + res.status + (detail ? ': ' + detail : '') + '). Please try again.', true);
+        return;
+      }
+      form.classList.add('done');
+      say("You're on the list. Check your inbox.");
+    } catch (err) {
+      console.error('Klaviyo sign-up could not connect', err);
+      say("Couldn't reach the sign-up service. Check your connection and try again.", true);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+})();
+</script>
+</body>
+</html>
